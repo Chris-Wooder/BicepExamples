@@ -1,0 +1,17 @@
+# Bicep build artifacts (ARM templates)
+modules/*.json
+examples/*.json
+
+# IDE files
+.vscode/
+.vs/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*~
