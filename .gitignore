@@ -1,5 +1,6 @@
 # Bicep build artifacts (ARM templates)
-*.json
+modules/*.json
+examples/*.json
 
 # IDE files
 .vscode/
