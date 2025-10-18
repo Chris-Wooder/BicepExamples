@@ -91,7 +91,7 @@ param minimumTlsVersion string = 'TLS1_2'
   'Enabled'
   'Disabled'
 ])
-param publicNetworkAccess string = enablePrivateEndpoint ? 'Disabled' : 'Enabled'
+param publicNetworkAccess string = 'Enabled'
 
 // Storage Account resource
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
@@ -178,7 +178,7 @@ resource blobPrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZ
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-blob-core-windows-net'
+        name: 'privatelink-blob-${replace(environment().suffixes.storage, '.', '-')}'
         properties: {
           privateDnsZoneId: blobPrivateDnsZoneId
         }
@@ -217,7 +217,7 @@ resource filePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZ
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-file-core-windows-net'
+        name: 'privatelink-file-${replace(environment().suffixes.storage, '.', '-')}'
         properties: {
           privateDnsZoneId: filePrivateDnsZoneId
         }
@@ -256,7 +256,7 @@ resource queuePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDns
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-queue-core-windows-net'
+        name: 'privatelink-queue-${replace(environment().suffixes.storage, '.', '-')}'
         properties: {
           privateDnsZoneId: queuePrivateDnsZoneId
         }
@@ -295,7 +295,7 @@ resource tablePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDns
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-table-core-windows-net'
+        name: 'privatelink-table-${replace(environment().suffixes.storage, '.', '-')}'
         properties: {
           privateDnsZoneId: tablePrivateDnsZoneId
         }

@@ -96,6 +96,7 @@ module storageAccount './modules/storageAccount.bicep' = {
     enableQueueService: true
     enableTableService: true
     enablePrivateEndpoint: true
+    publicNetworkAccess: 'Disabled'  // Recommended when using private endpoints
     subnetId: '/subscriptions/.../subnets/my-subnet'
     blobPrivateEndpointName: 'pe-mystorageaccount-blob'
     filePrivateEndpointName: 'pe-mystorageaccount-file'

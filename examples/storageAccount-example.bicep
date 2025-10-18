@@ -135,6 +135,7 @@ module storageAccount '../modules/storageAccount.bicep' = {
     enableQueueService: true
     enableTableService: true
     enablePrivateEndpoint: true
+    publicNetworkAccess: 'Disabled'
     subnetId: vnet.properties.subnets[0].id
     blobPrivateEndpointName: 'pe-${storageAccountName}-blob'
     filePrivateEndpointName: 'pe-${storageAccountName}-file'
