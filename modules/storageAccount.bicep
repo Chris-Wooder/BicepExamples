@@ -93,6 +93,9 @@ param minimumTlsVersion string = 'TLS1_2'
 ])
 param publicNetworkAccess string = 'Enabled'
 
+// Variable for DNS zone configuration naming (used in private DNS zone groups)
+var dnsZoneSuffix = replace(environment().suffixes.storage, '.', '-')
+
 // Storage Account resource
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: storageAccountName
@@ -178,7 +181,7 @@ resource blobPrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZ
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-blob-${replace(environment().suffixes.storage, '.', '-')}'
+        name: 'privatelink-blob-${dnsZoneSuffix}'
         properties: {
           privateDnsZoneId: blobPrivateDnsZoneId
         }
@@ -217,7 +220,7 @@ resource filePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZ
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-file-${replace(environment().suffixes.storage, '.', '-')}'
+        name: 'privatelink-file-${dnsZoneSuffix}'
         properties: {
           privateDnsZoneId: filePrivateDnsZoneId
         }
@@ -256,7 +259,7 @@ resource queuePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDns
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-queue-${replace(environment().suffixes.storage, '.', '-')}'
+        name: 'privatelink-queue-${dnsZoneSuffix}'
         properties: {
           privateDnsZoneId: queuePrivateDnsZoneId
         }
@@ -295,7 +298,7 @@ resource tablePrivateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDns
   properties: {
     privateDnsZoneConfigs: [
       {
-        name: 'privatelink-table-${replace(environment().suffixes.storage, '.', '-')}'
+        name: 'privatelink-table-${dnsZoneSuffix}'
         properties: {
           privateDnsZoneId: tablePrivateDnsZoneId
         }
