@@ -172,12 +172,8 @@ if (-not [string]::IsNullOrEmpty($ServiceBusName)) {
     $deploymentParams.serviceBusName = $ServiceBusName
 }
 
-# Convert tags to JSON format for Azure CLI
-$tagsJson = ($Tags.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join " "
+# Add tags to deployment parameters
 $deploymentParams.tags = $Tags
-
-# Convert parameters to JSON for Azure CLI
-$paramsJson = $deploymentParams | ConvertTo-Json -Compress -Depth 10
 
 # Create a temporary parameters file
 $tempParamsFile = [System.IO.Path]::GetTempFileName()
